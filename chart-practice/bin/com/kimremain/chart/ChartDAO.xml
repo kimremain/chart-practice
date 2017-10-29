@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="com.kimremain.chart.ChartDAO">
+ 
+    <select id="getChartData" resultType="com.kimremain.chart.ChartVO">
+		SELECT 
+		    DT_YEAR AS YEAR,
+		    SUM(CASE WHEN CD_KIND = 'HP' THEN CN_SUM ELSE 0 END) AS HP,
+		    SUM(CASE WHEN CD_KIND = 'DELL' THEN CN_SUM ELSE 0 END) AS DELL,
+		    SUM(CASE WHEN CD_KIND = 'IBM' THEN CN_SUM ELSE 0 END) AS IBM
+		FROM 
+		    CHART
+		GROUP BY
+		    DT_YEAR
+		ORDER BY
+		    DT_YEAR
+    </select>
+ 
+</mapper>
